@@ -4,6 +4,7 @@
 
 Dog::Dog() : Animal("Dog")
 {
+	brain = new Brain();
 	std::cout << "Dog default constructor called\n";
 }
 
@@ -36,4 +37,24 @@ Dog::~Dog()
 void	Dog::makeSound() const
 {
 	std::cout << "Woof Woof!\n";
+}
+
+std::string	Dog::getIdea(int i) const
+{
+	if (i < 0 || i >= 100)
+	{
+		std::cout << "Index out of bounds\n";
+		return "";
+	}
+	return brain->ideas[i];
+}
+
+void	Dog::setIdea(int i, const std::string& idea)
+{
+	if (i < 0 || i >= 100)
+	{
+		std::cout << "Index out of bounds\n";
+		return;
+	}
+	brain->ideas[i] = idea;
 }

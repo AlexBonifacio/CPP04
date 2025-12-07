@@ -10,14 +10,56 @@
 
 int main(void)
 {
-	const Animal *animals = new Animal[N];
+	Animal *animals[N];
 
 	for (int i = 0; i < (N / 2); i++)
 	{
-		animals[i] = Animal animal("dog");
+		animals[i] = new Dog();
 	}
+	std::cout << '\n';
+	for (int i = N - 1; i >= (N / 2); i--)
+	{
+		animals[i] = new Cat();
+	}
+	std::cout << '\n';
+	std::cout << '\n';
+	std::cout << '\n';
+	
+	animals[1]->makeSound();
+	std::cout << dynamic_cast<Dog*>(animals[1])->getIdea(1) << '\n';
+	std::cout << dynamic_cast<Dog*>(animals[1])->getIdea(2) << '\n';
 
-	delete [] animals;
+	dynamic_cast<Dog*>(animals[1])->setIdea(1, "Chase the cat");
+	std::string idea;
+
+	idea = dynamic_cast<Dog*>(animals[1])->getIdea(1);
+	std::cout << "Updated idea 1: " << idea << '\n';
+
+	*animals[1] = *animals[2];
+
+	idea = dynamic_cast<Dog*>(animals[2])->getIdea(1);
+	std::cout << "Updated idea 2: " << idea << '\n';
+
+	dynamic_cast<Dog*>(animals[1])->setIdea(1, "Sleep all day");
+	idea = dynamic_cast<Dog*>(animals[1])->getIdea(1);
+	std::cout << "Updated idea 1: " << idea << '\n';
+
+	idea = dynamic_cast<Dog*>(animals[2])->getIdea(1);
+	std::cout << "Updated idea 2: " << idea << '\n';
+
+	dynamic_cast<Dog*>(animals[1])->setIdea(1, "test idea for deep copy");
+
+
+
+
+	std::cout << '\n';
+	std::cout << '\n';
+	std::cout << '\n';
+	for (int i = 0; i < N; i++)
+	{
+		std::cout << "Deleting animal at index " << i << ":\n";
+		delete animals[i];
+	}
 }
 // int	main(void)
 // {

@@ -13,8 +13,11 @@ class Dog : public Animal
 		Dog& operator=(const Dog& other);
 
 		void makeSound() const;
+		std::string getIdea(int i) const;
+		void setIdea(int i, const std::string& idea);
 
 	private:
 		Brain* brain;
 };
+
 #endif // DOG_HPP

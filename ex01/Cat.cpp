@@ -4,10 +4,12 @@
 Cat::Cat() : Animal("Cat")
 {
 	std::cout << "Cat default constructor called\n";
+	brain = new Brain();
 }
 
 Cat::Cat(const Cat& copy) : Animal(copy)
 {
+	brain = new Brain(*copy.brain);
 	std::cout << "Cat copy constructor called\n";
 }
 
@@ -16,6 +18,9 @@ Cat&	Cat::operator=(const Cat& other)
 	if (this != &other)
 	{
 		Animal::operator=(other);
+		if (brain)
+			delete brain;
+		brain = new Brain(*other.brain);
 	}
 
 	std::cout << "Cat assignment operator called\n";

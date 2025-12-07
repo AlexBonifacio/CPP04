@@ -3,7 +3,8 @@ CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -MMD -MP
 
 SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp \
-		WrongAnimal.cpp WrongCat.cpp
+		WrongAnimal.cpp WrongCat.cpp \
+		Brain.cpp
 
 OBJDIR = obj
 

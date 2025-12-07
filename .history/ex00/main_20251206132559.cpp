@@ -33,7 +33,7 @@ int	main(void)
 	
 	const WrongAnimal* wrongMeta = new WrongAnimal();
 	std::cout << "\n";
-	const WrongCat* wrongCat = new WrongCat();
+	const WrongAnimal* wrongCat = new WrongCat();
 	std::cout << "\n";
 	std::cout << wrongMeta->getType() << '\n';
 	wrongMeta->makeSound();
@@ -42,11 +42,7 @@ int	main(void)
 	std::cout << wrongCat->getType() << '\n';
 	wrongCat->makeSound();
 	delete wrongCat;
-	std::cout << "\n\n";
 
-	WrongCat testWrongCat;
-	testWrongCat.makeSound();
-	std::cout << "\n";
 
 	return 0;
 }

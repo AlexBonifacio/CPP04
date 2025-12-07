@@ -6,10 +6,17 @@
 
 #include <iostream>
 
-#define N 10
+#define N 6
 
+/* Operator copy test*/
 int main(void)
 {
+	if (N % 2 != 0)
+	{
+		std::cout << "N must be even\n";
+		return 1;
+	}
+
 	Animal *animals[N];
 
 	for (int i = 0; i < (N / 2); i++)
@@ -21,87 +28,95 @@ int main(void)
 	{
 		animals[i] = new Cat();
 	}
-	std::cout << '\n';
-	std::cout << '\n';
-	std::cout << '\n';
+	std::cout << "\n\n";
 	
-	animals[1]->makeSound();
-	std::cout << dynamic_cast<Dog*>(animals[1])->getIdea(1) << '\n';
-	std::cout << dynamic_cast<Dog*>(animals[1])->getIdea(2) << '\n';
+	Cat *dog1 = dynamic_cast<Cat*>(animals[4]);
+	Cat *dog2 = dynamic_cast<Cat*>(animals[5]);
+	/* Here we test the deep copy, only working with idea 1 */
+	/* First we check the original idea */
+	std::cout << "Dog1" << dog1->getIdea(1) << '\n';
 
-	dynamic_cast<Dog*>(animals[1])->setIdea(1, "Chase the cat");
-	std::string idea;
+	/* Then we update dog1 idea */
+	dog1->setIdea(1, "Chase the cat");
 
-	idea = dynamic_cast<Dog*>(animals[1])->getIdea(1);
-	std::cout << "Updated idea 1: " << idea << '\n';
+	/* Print dog1 updated idea */
+	std::cout << "Dog1 Updated idea 1: " << dog1->getIdea(1) << '\n';
 
-	*animals[1] = *animals[2];
+	/* Copy Dog1 into Dog2 */
+	*dog2 = *dog1;
 
-	idea = dynamic_cast<Dog*>(animals[2])->getIdea(1);
-	std::cout << "Updated idea 2: " << idea << '\n';
+	/* Print dog2 idea to see if it was updated */
+	/* dog2 idea must be the same as dog1 idea*/
+	std::cout << "Dog2 Updated idea 1: " << dog2->getIdea(1) << '\n';
 
-	dynamic_cast<Dog*>(animals[1])->setIdea(1, "Sleep all day");
-	idea = dynamic_cast<Dog*>(animals[1])->getIdea(1);
-	std::cout << "Updated idea 1: " << idea << '\n';
+	/* We change the idea1 of dog1 */
+	dog1->setIdea(1, "Deep sleep all day");
+	std::cout << "Dog1 Updated idea 1: " << dog1->getIdea(1) << '\n';
 
-	idea = dynamic_cast<Dog*>(animals[2])->getIdea(1);
-	std::cout << "Updated idea 2: " << idea << '\n';
+	/* And we check that it hasn't changed the idea of dog2 */
+	std::cout << "Dog2 Updated idea 1: " << dog2->getIdea(1) << '\n';
 
-	dynamic_cast<Dog*>(animals[1])->setIdea(1, "test idea for deep copy");
-
-
-
-
-	std::cout << '\n';
-	std::cout << '\n';
-	std::cout << '\n';
+	std::cout << "\n\n\n";
 	for (int i = 0; i < N; i++)
 	{
-		std::cout << "Deleting animal at index " << i << ":\n";
 		delete animals[i];
 	}
 }
-// int	main(void)
+
+/* Copy constructor test */
+// int main(void)
 // {
-// 	const Animal* meta = new Animal();
-// 	std::cout << "\n";
-// 	const Animal* i = new Cat();
-// 	std::cout << "\n";
-// 	const Animal* j = new Dog();
+// 	if (N % 2 != 0)
+// 	{
+// 		std::cout << "N must be even\n";
+// 		return 1;
+// 	}
 
-// 	std::cout << "\n";
-// 	std::cout << meta->getType() << '\n';
-// 	meta->makeSound();
-// 	delete meta;
-// 	std::cout << "\n";
-	
-// 	std::cout << i->getType() << '\n';
-// 	i->makeSound();
-// 	delete i;
-// 	std::cout << "\n";
+// 	Animal *animals[N];
 
-// 	std::cout << j->getType() << '\n';
-// 	j->makeSound();
-// 	delete j;
-
-// 	std::cout << "\n--- WrongAnimal tests ---\n\n";
-	
-// 	const WrongAnimal* wrongMeta = new WrongAnimal();
-// 	std::cout << "\n";
-// 	const WrongCat* wrongCat = new WrongCat();
-// 	std::cout << "\n";
-// 	std::cout << wrongMeta->getType() << '\n';
-// 	wrongMeta->makeSound();
-// 	delete wrongMeta;
-// 	std::cout << "\n";
-// 	std::cout << wrongCat->getType() << '\n';
-// 	wrongCat->makeSound();
-// 	delete wrongCat;
+// 	for (int i = 0; i < (N / 2); i++)
+// 	{
+// 		animals[i] = new Dog();
+// 	}
+// 	std::cout << '\n';
+// 	for (int i = N - 1; i >= (N / 2); i--)
+// 	{
+// 		animals[i] = new Cat();
+// 	}
 // 	std::cout << "\n\n";
+	
+// 	Dog* dog1 = dynamic_cast<Dog*>(animals[1]);
 
-// 	WrongCat testWrongCat;
-// 	testWrongCat.makeSound();
-// 	std::cout << "\n";
 
-// 	return 0;
+
+// 	/* Here we test the deep copy, only working with idea 1 */
+// 	/* First we check the original idea */
+// 	std::cout << dog1->getIdea(1) << '\n';
+
+// 	/* Then we update dog1 idea */
+// 	dog1->setIdea(1, "Chase the cat");
+
+// 	Dog snoopy(*dog1);
+// 	/* Print dog1 updated idea */
+// 	std::cout << "Updated idea 1: " << dog1->getIdea(1) << '\n';
+
+// 	/* Copy Dog1 into Dog2 */
+
+// 	/* Print dog2 idea to see if it was updated */
+// 	/* dog2 idea must be the same as dog1 idea*/
+// 	std::cout << "Snoopy idea: " << snoopy.getIdea(1) << '\n';
+	
+// 	/* We change the idea1 of dog1 */
+// 	dog1->setIdea(1, "Deep sleep all day");
+// 	std::cout << "Updated idea 1: " << dog1->getIdea(1) << '\n';
+
+// 	/* And we check that it hasn't changed the idea of snoopy */
+// 	std::cout << "Snoopy idea: " << snoopy.getIdea(1) << '\n';
+
+
+// 	std::cout << "\n\n\n";
+// 	for (int i = 0; i < N; i++)
+// 	{
+// 		delete animals[i];
+// 	}
 // }

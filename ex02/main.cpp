@@ -4,16 +4,30 @@
 
 #include <iostream>
 
-int main()
+int	main(void)
 {
-	Animal* a = new Dog();
-	Animal* b = new Cat();
+	// const Animal* meta = new Animal();
+	std::cout << "\n";
+	const Animal* i = new Cat();
+	std::cout << "\n";
+	const Animal* j = new Dog();
 
-	// Animal* c = new Animal(); // This line will cause a compilation error
+	std::cout << "\n";
+	// std::cout << meta->getType() << '\n';
+	// meta->makeSound();
+	std::cout << "\n";
+	
+	std::cout << i->getType() << '\n';
+	i->makeSound();
+	delete i;
+	std::cout << "\n";
 
-	a->makeSound();
-	b->makeSound();
+	std::cout << j->getType() << '\n';
+	j->makeSound();
+	delete j;
 
-	delete a;
-	delete b;
+	std::cout << "\n";
+
+
+	return 0;
 }

@@ -30,8 +30,8 @@ int main(void)
 	}
 	std::cout << "\n\n";
 	
-	Cat *dog1 = dynamic_cast<Cat*>(animals[4]);
-	Cat *dog2 = dynamic_cast<Cat*>(animals[5]);
+	Dog *dog1 = dynamic_cast<Dog*>(animals[1]);
+	Dog *dog2 = dynamic_cast<Dog*>(animals[2]);
 	/* Here we test the deep copy, only working with idea 1 */
 	/* First we check the original idea */
 	std::cout << "Dog1" << dog1->getIdea(1) << '\n';
